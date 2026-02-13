@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary: #6bb8d0;
+  --color-primary-light: #8ccade;
+  --color-primary-dark: #4a8fa8;
+  --color-accent: #a0d4e4;
+  --color-accent-light: #c0e8f4;
+  --color-surface: #08202d;
+  --color-surface-light: #0d2a3a;
+  --color-surface-lighter: #143848;
+  --color-text: #e0f0f5;
+  --color-text-muted: #7ea8b8;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: #08202d;
+}

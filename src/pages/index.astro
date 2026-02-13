@@ -1,0 +1,171 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const categories = ["professional", "personal", "open-source"] as const;
+
+const grouped = Object.fromEntries(
+  categories.map((cat) => [cat, allProjects.filter((p) => p.data.category === cat)])
+);
+
+const categoryLabels: Record<string, string> = {
+  professional: "Professional",
+  personal: "Personal",
+  "open-source": "Open Source",
+};
+
+const categoryDescriptions: Record<string, string> = {
+  professional: "Production apps serving millions of users",
+  personal: "Side projects and experiments",
+  "open-source": "Contributions to the community",
+};
+
+const recentPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 10);
+---
+
+<BaseLayout title="Fahmi Sidik — Mobile App Engineer">
+  <!-- Hero -->
+  <section class="min-h-[80vh] flex flex-col justify-center">
+    <div class="space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm">
+        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        Available for Opportunity
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+        Mobile App<br />
+        <span class="bg-gradient-to-r from-primary to-cyan-300 bg-clip-text text-transparent">
+          Engineer
+        </span>
+      </h1>
+      <p class="text-text-muted text-lg max-w-xl leading-relaxed">
+        Building polished mobile experiences with Flutter, Kotlin, and Swift.
+        Passionate about clean architecture, performance, and great UX.
+      </p>
+      <div class="flex gap-4 pt-2">
+        <a
+          href="#projects"
+          class="px-6 py-3 bg-primary hover:bg-primary-dark rounded-lg text-surface text-sm font-medium transition-colors"
+        >
+          View Projects
+        </a>
+        <a
+          href="/blog"
+          class="px-6 py-3 border border-white/10 hover:border-white/20 rounded-lg text-sm font-medium transition-colors"
+        >
+          Read Blog
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects by Category -->
+  <section id="projects" class="pt-20">
+    <div class="mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold">Projects</h2>
+      <p class="text-text-muted text-lg mt-3 max-w-2xl">
+        A collection of work across professional, personal, and open source projects.
+      </p>
+    </div>
+
+    {categories.map((cat, catIndex) =>
+      grouped[cat].length > 0 && (
+        <div class="mb-24">
+          <div class="flex items-center gap-4 mb-3">
+            <span class="w-3 h-3 rounded-full bg-primary"></span>
+            <h3 class="text-2xl font-semibold">{categoryLabels[cat]}</h3>
+          </div>
+          <p class="text-text-muted text-sm mb-8 ml-7">
+            {categoryDescriptions[cat]}
+          </p>
+          <div class="grid md:grid-cols-2 gap-6">
+            {grouped[cat].map((project) => (
+              <a
+                href={`/projects/${project.id}`}
+                class="group block p-6 rounded-xl border border-white/5 bg-surface-light/50 hover:bg-surface-light hover:border-primary/30 transition-all duration-300"
+              >
+                <h4 class="text-lg font-semibold group-hover:text-primary transition-colors">
+                  {project.data.title}
+                </h4>
+                <p class="text-text-muted text-sm mt-2 line-clamp-2">
+                  {project.data.description}
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                  {project.data.tech.map((t) => (
+                    <span class="text-xs px-2 py-1 rounded bg-white/5 text-text-muted">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div class="flex items-center gap-4 mt-4 text-xs text-text-muted">
+                  <time datetime={project.data.date.toISOString()}>
+                    {project.data.date.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                    })}
+                  </time>
+                  {project.data.url && <span class="text-primary">Live &#8599;</span>}
+                  {project.data.repo && <span class="text-primary">Source &#8599;</span>}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    )}
+  </section>
+
+  <!-- Recent Posts -->
+  {recentPosts.length > 0 && (
+    <section class="pt-10 pb-20">
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold">Recent Posts</h2>
+          <p class="text-text-muted text-lg mt-3">Thoughts on mobile development and engineering.</p>
+        </div>
+        <a href="/blog" class="text-sm text-text-muted hover:text-primary transition-colors hidden md:block">
+          View all &rarr;
+        </a>
+      </div>
+      <div class="space-y-4">
+        {recentPosts.map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="group block p-6 rounded-xl border border-white/5 bg-surface-light/50 hover:bg-surface-light hover:border-primary/30 transition-all duration-300"
+          >
+            <div class="flex items-center gap-3 text-sm text-text-muted">
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              {post.data.tags.length > 0 && (
+                <>
+                  <span>&middot;</span>
+                  <span>{post.data.tags[0]}</span>
+                </>
+              )}
+            </div>
+            <h3 class="text-lg font-semibold mt-2 group-hover:text-primary transition-colors">
+              {post.data.title}
+            </h3>
+            <p class="text-text-muted text-sm mt-2">
+              {post.data.description}
+            </p>
+          </a>
+        ))}
+      </div>
+      <a href="/blog" class="block mt-8 text-sm text-text-muted hover:text-primary transition-colors md:hidden">
+        View all posts &rarr;
+      </a>
+    </section>
+  )}
+</BaseLayout>

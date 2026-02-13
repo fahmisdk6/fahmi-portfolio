@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Fahmi Sidik — Mobile App Engineer" } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen relative">
+    <canvas id="bg-canvas" class="fixed inset-0 -z-10 pointer-events-none"></canvas>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-surface/60 border-b border-white/5">
+      <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="text-lg font-semibold tracking-tight hover:text-primary transition-colors">
+          fahmi<span class="text-primary">.</span>dev
+        </a>
+        <div class="flex items-center gap-8">
+          {[
+            { href: "/", label: "Home" },
+            { href: "/#projects", label: "Projects" },
+            { href: "/blog", label: "Blog" },
+          ].map(({ href, label }) => (
+            <a
+              href={href}
+              class:list={[
+                "text-sm transition-colors",
+                currentPath === href || (href !== "/" && !href.includes("#") && currentPath.startsWith(href))
+                  ? "text-primary font-medium"
+                  : "text-text-muted hover:text-text",
+              ]}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-24 pb-16 px-6 max-w-5xl mx-auto">
+      <slot />
+    </main>
+
+    <footer class="border-t border-white/5 py-8 px-6">
+      <div class="max-w-5xl mx-auto flex items-center justify-between text-sm text-text-muted">
+        <span>&copy; {new Date().getFullYear()} Fahmi Sidik</span>
+        <div class="flex gap-6">
+          <a href="https://github.com/nicenathapong" class="hover:text-text transition-colors">GitHub</a>
+          <a href="https://linkedin.com/in/fahmisidik" class="hover:text-text transition-colors">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      import "../scripts/background.ts";
+    </script>
+  </body>
+</html>
