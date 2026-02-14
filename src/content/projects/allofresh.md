@@ -1,17 +1,20 @@
 ---
 title: Allofresh
-description: Online grocery platform delivering fresh products with a seamless mobile experience. Rated 4.9 on app stores.
+description: Online grocery platform serving millions of active users with seamless shopping, real-time order tracking, and instant delivery options. Rated 4.9 on Play Store.
 category: professional
-tech: [Flutter, Dart, Bloc, Firebase, CI/CD]
-date: 2024-01-01
+tech: [Flutter, Dart, Bloc, Fastlane, GitLab CI/CD, Ruby]
+url: https://allofresh.id
+date: 2023-03-01
 featured: true
 ---
 
-Allofresh is an online grocery delivery platform built with Flutter, providing users with a seamless shopping experience for fresh products.
+Online grocery platform formed through a joint venture between Bukalapak, Trans Retail Indonesia, and Growtheum Capital Partners. Launched in 2022 with an initial funding of $70 million. Cross-platform mobile application built for iOS and Android.
 
 ## Key Contributions
 
-- Built and maintained the Flutter mobile application
-- Implemented state management using Bloc pattern
-- Integrated Firebase for analytics and push notifications
-- Set up CI/CD pipelines for automated builds and deployments
+- Maintained Android (Kotlin, MVVM) and iOS (Swift, VIPER) apps with ~99% crash-free rate while optimizing app size, startup time, and rendering performance
+- Led migration of native apps to Flutter, reducing development effort by 30%
+- Built Flutter features including authentication, payments, and cart synchronization using Bloc and clean architecture
+- Automated mobile development workflows using Fastlane, Ruby, GitLab CI/CD, and Docker for 8 engineers
+- Developed internal libraries for feature toggles, device fingerprinting, performance tracking, and design systems
+- Regularly upgraded Flutter, Android, and iOS SDKs across all applications

@@ -3,7 +3,7 @@ title: Portfolio Website
 description: Personal portfolio and blog built with Astro, featuring an interactive particle background.
 category: personal
 tech: [Astro, TypeScript, Tailwind CSS, Canvas API]
-url: https://www.fahmisidik.dev
+url: https://fahmisidik.dev
 date: 2024-06-01
 ---
 
