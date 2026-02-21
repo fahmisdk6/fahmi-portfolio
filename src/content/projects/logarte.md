@@ -1,13 +1,13 @@
 ---
-title: Logarte
-description: In-app debug console and logger for Flutter apps with network inspection, navigation tracking, and log export.
+title: "Fork: Logarte"
+description: Forked and extended in-app debug console and logger for Flutter apps with network inspection, navigation tracking, and log export.
 category: open-source
 tech: [Flutter, Dart]
 repo: https://github.com/allofresh/logarte
 date: 2024-10-01
 ---
 
-In-app debug console and logger for Flutter apps. Provides real-time monitoring and logging capabilities directly within the app's UI without requiring external tools or IDE connections.
+Forked from the original [Logarte](https://github.com/Kharolski/logarte) package and extended with additional features for internal use at Allofresh. Provides real-time monitoring and logging capabilities directly within the app's UI without requiring external tools or IDE connections.
 
 ## Key Features
 
