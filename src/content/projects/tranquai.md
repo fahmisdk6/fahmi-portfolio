@@ -2,7 +2,7 @@
 title: TranquAI - AI Meditation
 description: AI-powered meditation app that creates personalized sessions based on your goals, with customizable voice narration and flexible duration.
 category: personal
-tech: [Flutter, Dart, AI]
+tech: [Flutter, Dart, Bloc, OpenAI, Elevenlabs, Supabase]
 url: https://fahmisidik.dev/tranquai/
 date: 2025-10-01
 ---

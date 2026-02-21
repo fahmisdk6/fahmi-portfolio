@@ -4,7 +4,7 @@ description: One of Indonesia's largest e-commerce platforms with 50M+ downloads
 category: professional
 tech: [Android, iOS, Kotlin, Swift, MVI, Fastlane, GitLab CI/CD, Jenkins, Ruby]
 url: https://bukalapak.com
-date: 2018-08-01
+date: 2026-01-01
 featured: true
 ---
 

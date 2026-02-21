@@ -2,7 +2,7 @@
 title: PickerPacker Allofresh
 description: Internal app for Allofresh warehouse staff to manage order picking and packing processes.
 category: professional
-tech: [Flutter, Dart, Bloc, Fastlane, GitLab CI/CD, Ruby]
+tech: [Flutter, Dart, Bloc, Fastlane, GitLab CI/CD, Github Actions, Ruby]
 url: https://allofresh.id
 date: 2023-06-01
 ---

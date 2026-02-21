@@ -103,12 +103,6 @@ const recentPosts = (await getCollection("blog"))
                   ))}
                 </div>
                 <div class="flex items-center gap-4 mt-4 text-xs text-text-muted">
-                  <time datetime={project.data.date.toISOString()}>
-                    {project.data.date.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                    })}
-                  </time>
                   {project.data.url && <span class="text-primary">Live &#8599;</span>}
                   {project.data.repo && <span class="text-primary">Source &#8599;</span>}
                 </div>

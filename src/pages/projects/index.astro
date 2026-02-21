@@ -54,12 +54,6 @@ const categoryLabels: Record<string, string> = {
                 ))}
               </div>
               <div class="flex items-center gap-4 mt-4 text-xs text-text-muted">
-                <time datetime={project.data.date.toISOString()}>
-                  {project.data.date.toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                  })}
-                </time>
                 {project.data.url && <span>Live &nearr;</span>}
                 {project.data.repo && <span>Source &nearr;</span>}
               </div>
