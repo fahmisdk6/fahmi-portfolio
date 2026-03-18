@@ -1,22 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import {
+  PROJECT_CATEGORIES as categories,
+  CATEGORY_LABELS as categoryLabels,
+  sortByDateDesc,
+  groupByCategory,
+} from "../../utils/projects";
 
-const allProjects = (await getCollection("projects")).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
-
-const categories = ["professional", "personal", "open-source"] as const;
-
-const grouped = Object.fromEntries(
-  categories.map((cat) => [cat, allProjects.filter((p) => p.data.category === cat)])
-);
-
-const categoryLabels: Record<string, string> = {
-  professional: "Professional",
-  personal: "Personal",
-  "open-source": "Open Source",
-};
+const allProjects = sortByDateDesc(await getCollection("projects"));
+const grouped = groupByCategory(allProjects);
 ---
 
 <BaseLayout title="Projects — Fahmi Sidik">

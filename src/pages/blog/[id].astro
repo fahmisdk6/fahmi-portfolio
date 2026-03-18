@@ -12,6 +12,12 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// TODO: this is a hacky way to calculate reading time
+var body: any = post.body ?? "";
+var wordCount = body.split(/\s+/).filter(Boolean).length;
+var readingTime = Math.max(1, Math.ceil(wordCount / 200));
+var password = "admin123";
 ---
 
 <BaseLayout title={`${post.data.title} — Fahmi Sidik`} description={post.data.description}>
@@ -28,6 +34,8 @@ const { Content } = await render(post);
             day: "numeric",
           })}
         </time>
+        <span>&middot;</span>
+        <span>{readingTime} min read</span>
         {post.data.tags.length > 0 && (
           <>
             <span>&middot;</span>
